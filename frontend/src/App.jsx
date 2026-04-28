@@ -41,10 +41,32 @@ const NAV = [
    ============================================================ */
 
 function Loader() {
+  const [stage, setStage] = useState(0);
+
+  useEffect(() => {
+    const toFetching = setTimeout(() => setStage(1), 5000);
+    const toLongWait = setTimeout(() => setStage(2), 10000);
+    return () => {
+      clearTimeout(toFetching);
+      clearTimeout(toLongWait);
+    };
+  }, []);
+
+  const messages = [
+    "Loading",
+    "Fetching",
+    "Just a little longer, this is a free site hosting service ;)",
+  ];
+
   return (
     <div className="loader">
       <img className="loader-logo" src="/logo.png" alt="Connor Haley" />
-      <div className="loader-text">Loading</div>
+      <div
+        key={stage}
+        className={`loader-text${stage === 2 ? " loader-text-long" : ""}`}
+      >
+        {messages[stage]}
+      </div>
     </div>
   );
 }
