@@ -1,19 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   BrowserRouter,
   Routes,
   Route,
   Link,
   useLocation,
+  useNavigate,
+  useParams,
 } from "react-router-dom";
 import "./App.css";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8001";
 
+export const PROJECT_SUBTABS = [
+  { slug: "drone-home",          label: "Drone Home" },
+  { slug: "startos",             label: "StaRTOS" },
+  { slug: "obdii-light-product", label: "OBDII Light Product" },
+  { slug: "embedded-labs",       label: "Embedded Labs" },
+];
+
 const NAV = [
   { to: "/",            label: "About",      num: "01", end: true },
   { to: "/experience",  label: "Experience", num: "02" },
-  { to: "/projects",    label: "Projects",   num: "03" },
+  {
+    to: "/projects",
+    label: "Projects",
+    num: "03",
+    children: PROJECT_SUBTABS.map((s, i) => ({
+      to: `/projects/${s.slug}`,
+      label: s.label,
+      num: `03.${i + 1}`,
+    })),
+  },
   { to: "/skills",      label: "Skills",     num: "04" },
   { to: "/contact",     label: "Contact",    num: "05" },
 ];
@@ -25,10 +43,7 @@ const NAV = [
 function Loader() {
   return (
     <div className="loader">
-      <div className="loader-mark" aria-hidden="true">
-        <span>C</span>
-        <span>H</span>
-      </div>
+      <img className="loader-logo" src="/logo.png" alt="Connor Haley" />
       <div className="loader-text">Loading</div>
     </div>
   );
@@ -60,6 +75,96 @@ function ScrollManager() {
    TOP NAVIGATION
    ============================================================ */
 
+function NavItem({ item, location, onNavigate }) {
+  const { to, label, num, end, children } = item;
+
+  const isActive = end
+    ? location.pathname === "/"
+    : location.pathname === to || location.pathname.startsWith(to + "/");
+
+  const [submenuOpen, setSubmenuOpen] = useState(false);
+  const closeTimer = useRef(null);
+
+  const openSubmenu = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setSubmenuOpen(true);
+  };
+
+  const closeSubmenuSoon = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setSubmenuOpen(false), 140);
+  };
+
+  useEffect(() => () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  }, []);
+
+  if (!children?.length) {
+    return (
+      <Link
+        to={to}
+        className={`nav-link ${isActive ? "active" : ""}`}
+        aria-current={isActive ? "page" : undefined}
+        onClick={onNavigate}
+      >
+        <span className="nav-link-num">{num}</span>
+        <span className="nav-link-label">{label}</span>
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className={`nav-link-group ${submenuOpen ? "open" : ""} ${isActive ? "active" : ""}`}
+      onMouseEnter={openSubmenu}
+      onMouseLeave={closeSubmenuSoon}
+      onFocus={openSubmenu}
+      onBlur={closeSubmenuSoon}
+    >
+      <Link
+        to={to}
+        className={`nav-link has-submenu ${isActive ? "active" : ""}`}
+        aria-current={isActive ? "page" : undefined}
+        aria-haspopup="menu"
+        aria-expanded={submenuOpen}
+        onClick={() => {
+          setSubmenuOpen(false);
+          onNavigate?.();
+        }}
+      >
+        <span className="nav-link-num">{num}</span>
+        <span className="nav-link-label">{label}</span>
+        <span className="nav-link-caret" aria-hidden="true">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </span>
+      </Link>
+      <div className="nav-submenu" role="menu">
+        {children.map((child) => {
+          const childActive = location.pathname === child.to;
+          return (
+            <Link
+              key={child.to}
+              to={child.to}
+              role="menuitem"
+              className={`nav-submenu-item ${childActive ? "active" : ""}`}
+              aria-current={childActive ? "page" : undefined}
+              onClick={() => {
+                setSubmenuOpen(false);
+                onNavigate?.();
+              }}
+            >
+              <span className="nav-submenu-num">{child.num}</span>
+              <span className="nav-submenu-label">{child.label}</span>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function TopNav({ name }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -76,55 +181,26 @@ function TopNav({ name }) {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  const initials = name
-    ? name
-        .split(/\s+/)
-        .map((w) => w[0])
-        .slice(0, 2)
-        .join("")
-    : "CH";
-
   return (
     <header className={`topnav ${scrolled ? "scrolled" : ""}`}>
       <div className="topnav-inner">
         <Link to="/" className="brand" aria-label="Home">
-          <span className="brand-mark" aria-hidden="true">{initials}</span>
+          <img className="brand-logo" src="/logo.png" alt="" aria-hidden="true" />
           <span className="brand-name">{name || "Connor Haley"}</span>
         </Link>
 
         <nav className={`nav-links ${mobileOpen ? "open" : ""}`} aria-label="Primary">
-          {NAV.map(({ to, label, num, end }) => {
-            const isActive = end
-              ? location.pathname === "/"
-              : location.pathname.startsWith(to);
-            return (
-              <Link
-                key={to}
-                to={to}
-                className={`nav-link ${isActive ? "active" : ""}`}
-                aria-current={isActive ? "page" : undefined}
-                onClick={() => setMobileOpen(false)}
-              >
-                <span className="nav-link-num">{num}</span>
-                <span className="nav-link-label">{label}</span>
-              </Link>
-            );
-          })}
+          {NAV.map((item) => (
+            <NavItem
+              key={item.to}
+              item={item}
+              location={location}
+              onNavigate={() => setMobileOpen(false)}
+            />
+          ))}
         </nav>
 
         <div className="topnav-right">
-          <a
-            className="nav-cta"
-            href="/connor_resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>Resume</span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M7 17 17 7" />
-              <path d="M7 7h10v10" />
-            </svg>
-          </a>
           <button
             className={`nav-toggle ${mobileOpen ? "open" : ""}`}
             onClick={() => setMobileOpen((v) => !v)}
@@ -230,6 +306,18 @@ function Hero({ resume }) {
             <path d="m12 5 7 7-7 7" />
           </svg>
         </Link>
+        <a
+          className="btn btn-outline"
+          href="/connor_resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Resume
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M7 17 17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </a>
         <Link to="/contact" className="btn btn-ghost">Get in touch</Link>
       </div>
     </section>
@@ -397,9 +485,7 @@ function ExperiencePage({ resume }) {
    PROJECTS PAGE
    ============================================================ */
 
-function ProjectsTabs({ projects }) {
-  const [active, setActive] = useState(0);
-
+function ProjectsTabs({ projects, activeIndex, onSelect }) {
   if (!projects?.length) {
     return (
       <div className="empty-projects">
@@ -411,22 +497,23 @@ function ProjectsTabs({ projects }) {
     );
   }
 
-  const project = projects[Math.min(active, projects.length - 1)];
+  const safeIndex = Math.min(Math.max(activeIndex, 0), projects.length - 1);
+  const project = projects[safeIndex];
 
   return (
     <div className="projects-shell">
       <div className="projects-tabs" role="tablist" aria-label="Projects">
         {projects.map((p, i) => {
-          const isActive = i === active;
+          const isActive = i === safeIndex;
           return (
             <button
-              key={p.name}
+              key={p.slug || p.name}
               role="tab"
               aria-selected={isActive}
               aria-controls={`project-panel-${i}`}
               id={`project-tab-${i}`}
               className={`projects-tab ${isActive ? "active" : ""}`}
-              onClick={() => setActive(i)}
+              onClick={() => onSelect(i)}
             >
               <span className="projects-tab-num">P/{String(i + 1).padStart(2, "0")}</span>
               <span className="projects-tab-name">{p.name}</span>
@@ -439,14 +526,14 @@ function ProjectsTabs({ projects }) {
       <article
         className="project-panel"
         role="tabpanel"
-        id={`project-panel-${active}`}
-        aria-labelledby={`project-tab-${active}`}
-        key={project.name}
+        id={`project-panel-${safeIndex}`}
+        aria-labelledby={`project-tab-${safeIndex}`}
+        key={project.slug || project.name}
       >
         <header className="project-panel-head">
           <div>
             <div className="project-panel-eyebrow">
-              {`Project ${String(active + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`}
+              {`Project ${String(safeIndex + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`}
             </div>
             <h3 className="project-panel-title">{project.name}</h3>
           </div>
@@ -481,7 +568,37 @@ function ProjectsTabs({ projects }) {
   );
 }
 
+function buildOrderedProjects(rawProjects = []) {
+  const bySlug = new Map(rawProjects.filter((p) => p.slug).map((p) => [p.slug, p]));
+  return PROJECT_SUBTABS.map(({ slug, label }) => {
+    const existing = bySlug.get(slug);
+    if (existing) return existing;
+    return {
+      slug,
+      name: label,
+      dates: "TBD",
+      tech: null,
+      bullets: ["Coming soon — write-up in progress."],
+    };
+  });
+}
+
 function ProjectsPage({ resume }) {
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const ordered = buildOrderedProjects(resume.projects);
+
+  const activeIndex = (() => {
+    if (!slug) return 0;
+    const idx = ordered.findIndex((p) => p.slug === slug);
+    return idx >= 0 ? idx : 0;
+  })();
+
+  const handleSelect = (idx) => {
+    const target = ordered[idx];
+    if (target?.slug) navigate(`/projects/${target.slug}`);
+  };
+
   return (
     <PageShell>
       <section className="section section-page">
@@ -490,7 +607,11 @@ function ProjectsPage({ resume }) {
           A rotating set of things I've built — embedded, full-stack, and the
           spaces between. Switch tabs to dig into each one.
         </p>
-        <ProjectsTabs projects={resume.projects} />
+        <ProjectsTabs
+          projects={ordered}
+          activeIndex={activeIndex}
+          onSelect={handleSelect}
+        />
         <PageCTA label="Building something interesting?" action="Let's talk" />
       </section>
     </PageShell>
@@ -598,6 +719,7 @@ function AppShell({ resume }) {
           <Route path="/" element={<HomePage resume={resume} />} />
           <Route path="/experience" element={<ExperiencePage resume={resume} />} />
           <Route path="/projects" element={<ProjectsPage resume={resume} />} />
+          <Route path="/projects/:slug" element={<ProjectsPage resume={resume} />} />
           <Route path="/skills" element={<SkillsPage resume={resume} />} />
           <Route path="/contact" element={<ContactPage resume={resume} />} />
           <Route path="*" element={<NotFoundPage />} />

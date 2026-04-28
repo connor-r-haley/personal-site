@@ -71,23 +71,41 @@ def get_resume():
         ],
         "projects": [
             {
-                "name": "Global Intelligence Simulator (Moralocracy)",
-                "tech": "React, FastAPI, MapLibre GL JS, WebSockets, OpenAI API",
-                "dates": "Oct 2024 – Present",
+                "slug": "drone-home",
+                "name": "Drone Home",
+                "tech": "ROS2, NVIDIA Jetson, Flask, LTE, Embedded C/C++",
+                "dates": "Aug 2024 – May 2025",
                 "bullets": [
-                    "Developed an online multiplayer global intelligence sim with 220+ countries powered by dynamic AI narrative.",
-                    "Engineered a FastAPI backend with real-time WebSocket multiplayer, async SQLite, & AI-powered event systems.",
-                    "Built an interactive React + MapLibre GL JS frontend with data-driven map overlays and geopolitical databases.",
+                    "Coming soon — full write-up of the Drone Home autonomous drone-retrieval and recharging vehicle.",
                 ],
             },
             {
-                "name": "Embedded Systems & Real-Time Communication Lab",
+                "slug": "startos",
+                "name": "StaRTOS",
+                "tech": "TM4C123, FreeRTOS, DSP, Audio Processing",
+                "dates": "2025",
+                "bullets": [
+                    "Coming soon — overview of StaRTOS, a real-time RTOS-driven light show app on a TM4C123.",
+                ],
+            },
+            {
+                "slug": "obdii-light-product",
+                "name": "OBDII Light Product",
+                "tech": "OBD-II, CAN bus, Microcontroller, Addressable LEDs",
+                "dates": "TBD",
+                "bullets": [
+                    "Coming soon — RPM-reactive in-car lighting driven by live OBD-II telemetry over CAN.",
+                ],
+            },
+            {
+                "slug": "embedded-labs",
+                "name": "Embedded Labs",
                 "tech": "TM4C123, RTOS, UART, I2C, SPI, DSP",
                 "dates": "Aug 2025 – Dec 2025",
                 "bullets": [
                     "Configured UART, I2C, and SPI interfaces on a TM4C123 μC to communicate with sensors & LCD displays.",
                     "Developed multi-threaded RTOS apps with priority scheduling, IPC, dynamic threading, & blocking semaphores.",
-                    "Configured Tiva DSP, Beaglebone Connection, Audio Output, & personal real-time light show app, StarTOS.",
+                    "Configured Tiva DSP, Beaglebone connection, audio output, and personal real-time light show app, StaRTOS.",
                 ],
             },
         ],
