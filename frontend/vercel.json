@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/((?!connor_resume\\.pdf|favicon\\.svg|icons\\.svg|assets/.*).*)", "destination": "/index.html" }
+  ]
+}

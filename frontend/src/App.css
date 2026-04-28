@@ -21,6 +21,30 @@
   scroll-margin-top: 90px;
 }
 
+/* Each routed page fades in */
+.page {
+  animation: pageIn 0.35s ease both;
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section-page {
+  padding-top: 4.5rem;
+  padding-bottom: 3rem;
+  min-height: calc(100vh - 200px);
+}
+
+.section-lede {
+  max-width: 620px;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: -1.25rem 0 2rem;
+}
+
 /* ============================================================
    LOADER
    ============================================================ */
@@ -402,38 +426,6 @@
   border-color: var(--teal);
   color: var(--teal-soft);
   box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.08);
-}
-
-.hero-contacts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-}
-
-.contact-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  font-weight: 500;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease,
-    transform 0.1s ease;
-}
-
-.contact-pill svg {
-  opacity: 0.85;
-}
-
-.contact-pill:hover {
-  color: var(--gold-bright);
-  border-color: var(--gold);
-  background: var(--bg-card-hover);
-  transform: translateY(-1px);
 }
 
 /* ============================================================
@@ -1112,6 +1104,72 @@
 }
 
 /* ============================================================
+   PAGE CTA (bottom of subpages)
+   ============================================================ */
+
+.page-cta {
+  margin-top: 3.5rem;
+  padding: 1.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background:
+    linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(45, 212, 191, 0.05)),
+    var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.page-cta-label {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  color: var(--text-heading);
+}
+
+/* ============================================================
+   404
+   ============================================================ */
+
+.section-notfound {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 220px);
+}
+
+.notfound-num {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 14vw, 9rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.notfound-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.notfound-text {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 
@@ -1125,7 +1183,7 @@
   max-width: 1080px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -1133,20 +1191,6 @@
   font-size: 0.75rem;
   color: var(--text-muted);
   letter-spacing: 0.04em;
-}
-
-.footer-meta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.footer-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
 }
 
 /* ============================================================
@@ -1251,5 +1295,11 @@
 
   .edu-year {
     align-self: flex-start;
+  }
+
+  .page-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.4rem 1.4rem;
   }
 }
