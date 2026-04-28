@@ -78,3 +78,10 @@ Edit the return value in `backend/main.py`, commit, and push. Both Vercel and Re
 ```bash
 git add . && git commit -m "update resume" && git push
 ```
+
+
+Next steps (from your newsite.md):
+Push to GitHub (git init && git add . && git commit && git push)
+Deploy backend to Render (free)
+Deploy frontend to Vercel (free)
+Set VITE_API_URL in Vercel env to your Render URL
