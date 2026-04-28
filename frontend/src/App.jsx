@@ -92,7 +92,7 @@ function NavItem({ item, location, onNavigate }) {
 
   const closeSubmenuSoon = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setSubmenuOpen(false), 140);
+    closeTimer.current = setTimeout(() => setSubmenuOpen(false), 500);
   };
 
   useEffect(() => () => {
@@ -231,21 +231,6 @@ function SectionHeading({ index, eyebrow, title }) {
 
 function PageShell({ children }) {
   return <div className="page">{children}</div>;
-}
-
-function PageCTA({ label = "Want to chat?", action = "Get in touch" }) {
-  return (
-    <div className="page-cta">
-      <span className="page-cta-label">{label}</span>
-      <Link to="/contact" className="btn btn-primary">
-        {action}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M5 12h14" />
-          <path d="m12 5 7 7-7 7" />
-        </svg>
-      </Link>
-    </div>
-  );
 }
 
 function ExperienceCard({ item }) {
@@ -474,8 +459,6 @@ function ExperiencePage({ resume }) {
             </div>
           </>
         )}
-
-        <PageCTA />
       </section>
     </PageShell>
   );
@@ -612,7 +595,6 @@ function ProjectsPage({ resume }) {
           activeIndex={activeIndex}
           onSelect={handleSelect}
         />
-        <PageCTA label="Building something interesting?" action="Let's talk" />
       </section>
     </PageShell>
   );
@@ -667,8 +649,6 @@ function SkillsPage({ resume }) {
             </div>
           </div>
         )}
-
-        <PageCTA />
       </section>
     </PageShell>
   );
