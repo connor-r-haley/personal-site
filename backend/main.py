@@ -59,6 +59,66 @@ def get_resume():
                     "Engineered show mixes for 100s of dancers, using Logic Pro X and a rigorous feedback process with team captains.",
                 ],
             },
+            {
+                "role": "Event Coordinator",
+                "company": "Science Olympiad at the University of Florida",
+                "location": "Gainesville, FL",
+                "dates": "Sep 2021 – Aug 2022",
+                "bullets": [
+                    "Coordinated volunteers for the Regional and State Florida Science Olympiad competitions held at UF.",
+                    "Handled marketing, selection, placement, and communication with volunteer workers across both events.",
+                    "Supervised day-of 'Build Events' — engineering challenges like long-soaring model planes and Rube Goldberg machines.",
+                ],
+            },
+        ],
+        "jobs": [
+            {
+                "role": "Library Assistant",
+                "company": "Marston Science Library — University of Florida",
+                "location": "Gainesville, FL",
+                "dates": "Jun 2022 – Feb 2023",
+                "bullets": [
+                    "Helped the UF community obtain books and tools.",
+                    "Provided technical assistance to students and researchers in the library.",
+                ],
+            },
+            {
+                "role": "Security Officer",
+                "company": "The High Dive Bar",
+                "location": "Gainesville, FL",
+                "dates": "May 2022 – Oct 2022",
+                "bullets": [
+                    "Prevented liabilities at the High Dive in Gainesville.",
+                    "Opened, closed, cleaned, operated ticket sales, and maintained Gainesville's historic 'High Dive' bar.",
+                ],
+            },
+            {
+                "role": "Summer Lifeguard",
+                "company": "Vesta Property Services",
+                "location": "Wynnfield Lakes",
+                "dates": "May 2021 – Aug 2021",
+                "bullets": [
+                    "Patrolled pools as a certified shallow-water lifeguard with CPR/AED certification.",
+                ],
+            },
+            {
+                "role": "Front Service Clerk",
+                "company": "Publix Super Markets",
+                "dates": "Sep 2019 – Aug 2020",
+                "bullets": [
+                    "Aided shoppers with grocery needs.",
+                    "Kept Publix clean and safe for customers throughout the pandemic.",
+                ],
+            },
+            {
+                "role": "Credit Union Teller",
+                "company": "VyStar Credit Union",
+                "dates": "Jun 2018 – May 2019",
+                "bullets": [
+                    "Interfaced with and utilized front-end financial software as a Credit Union Teller.",
+                    "Handled deposits, withdrawals, and transfers for credit-union members.",
+                ],
+            },
         ],
         "education": [
             {

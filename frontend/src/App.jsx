@@ -1,38 +1,20 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
   Route,
   Link,
   useLocation,
-  useNavigate,
-  useParams,
 } from "react-router-dom";
 import "./App.css";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8001";
 
-export const PROJECT_SUBTABS = [
-  { slug: "drone-home",          label: "Drone Home" },
-  { slug: "startos",             label: "StaRTOS" },
-  { slug: "obdii-light-product", label: "OBDII Light Product" },
-  { slug: "embedded-labs",       label: "Embedded Labs" },
-];
-
 const NAV = [
   { to: "/",            label: "About",      num: "01", end: true },
   { to: "/experience",  label: "Experience", num: "02" },
-  {
-    to: "/projects",
-    label: "Projects",
-    num: "03",
-    children: PROJECT_SUBTABS.map((s, i) => ({
-      to: `/projects/${s.slug}`,
-      label: s.label,
-      num: `03.${i + 1}`,
-    })),
-  },
-  { to: "/skills",      label: "Skills",     num: "04" },
+  { to: "/projects",    label: "Projects",   num: "03" },
+  { to: "/creative",    label: "Creative",   num: "04" },
   { to: "/contact",     label: "Contact",    num: "05" },
 ];
 
@@ -60,7 +42,7 @@ function Loader() {
 
   return (
     <div className="loader">
-      <img className="loader-logo" src="/logo.png" alt="Connor Haley" />
+      <img className="loader-logo" src="/logo_gold.png" alt="Connor Haley" />
       <div
         key={stage}
         className={`loader-text${stage === 2 ? " loader-text-long" : ""}`}
@@ -98,92 +80,22 @@ function ScrollManager() {
    ============================================================ */
 
 function NavItem({ item, location, onNavigate }) {
-  const { to, label, num, end, children } = item;
+  const { to, label, num, end } = item;
 
   const isActive = end
     ? location.pathname === "/"
     : location.pathname === to || location.pathname.startsWith(to + "/");
 
-  const [submenuOpen, setSubmenuOpen] = useState(false);
-  const closeTimer = useRef(null);
-
-  const openSubmenu = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setSubmenuOpen(true);
-  };
-
-  const closeSubmenuSoon = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setSubmenuOpen(false), 500);
-  };
-
-  useEffect(() => () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-  }, []);
-
-  if (!children?.length) {
-    return (
-      <Link
-        to={to}
-        className={`nav-link ${isActive ? "active" : ""}`}
-        aria-current={isActive ? "page" : undefined}
-        onClick={onNavigate}
-      >
-        <span className="nav-link-num">{num}</span>
-        <span className="nav-link-label">{label}</span>
-      </Link>
-    );
-  }
-
   return (
-    <div
-      className={`nav-link-group ${submenuOpen ? "open" : ""} ${isActive ? "active" : ""}`}
-      onMouseEnter={openSubmenu}
-      onMouseLeave={closeSubmenuSoon}
-      onFocus={openSubmenu}
-      onBlur={closeSubmenuSoon}
+    <Link
+      to={to}
+      className={`nav-link ${isActive ? "active" : ""}`}
+      aria-current={isActive ? "page" : undefined}
+      onClick={onNavigate}
     >
-      <Link
-        to={to}
-        className={`nav-link has-submenu ${isActive ? "active" : ""}`}
-        aria-current={isActive ? "page" : undefined}
-        aria-haspopup="menu"
-        aria-expanded={submenuOpen}
-        onClick={() => {
-          setSubmenuOpen(false);
-          onNavigate?.();
-        }}
-      >
-        <span className="nav-link-num">{num}</span>
-        <span className="nav-link-label">{label}</span>
-        <span className="nav-link-caret" aria-hidden="true">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </span>
-      </Link>
-      <div className="nav-submenu" role="menu">
-        {children.map((child) => {
-          const childActive = location.pathname === child.to;
-          return (
-            <Link
-              key={child.to}
-              to={child.to}
-              role="menuitem"
-              className={`nav-submenu-item ${childActive ? "active" : ""}`}
-              aria-current={childActive ? "page" : undefined}
-              onClick={() => {
-                setSubmenuOpen(false);
-                onNavigate?.();
-              }}
-            >
-              <span className="nav-submenu-num">{child.num}</span>
-              <span className="nav-submenu-label">{child.label}</span>
-            </Link>
-          );
-        })}
-      </div>
-    </div>
+      <span className="nav-link-num">{num}</span>
+      <span className="nav-link-label">{label}</span>
+    </Link>
   );
 }
 
@@ -207,7 +119,7 @@ function TopNav({ name }) {
     <header className={`topnav ${scrolled ? "scrolled" : ""}`}>
       <div className="topnav-inner">
         <Link to="/" className="brand" aria-label="Home">
-          <img className="brand-logo" src="/logo.png" alt="" aria-hidden="true" />
+          <img className="brand-logo" src="/logo_gold.png" alt="" aria-hidden="true" />
           <span className="brand-name">{name || "Connor Haley"}</span>
         </Link>
 
@@ -287,14 +199,12 @@ function ExperienceCard({ item }) {
 function Hero({ resume }) {
   return (
     <section id="about" className="hero">
-      <div className="hero-status">
-        <span className="hero-status-dot" />
-        Available for full-time roles · 2026
-      </div>
-
       <h1 className="hero-name">
-        <span className="hero-name-line">{resume.name.split(" ").slice(0, -1).join(" ")}</span>
-        <span className="hero-name-line accent">{resume.name.split(" ").slice(-1).join(" ")}</span>
+        <img
+          className="hero-name-logo"
+          src="/logo_color.png"
+          alt={resume.name}
+        />
       </h1>
 
       <div className="hero-title">
@@ -481,6 +391,17 @@ function ExperiencePage({ resume }) {
             </div>
           </>
         )}
+
+        {resume.jobs?.length > 0 && (
+          <>
+            <div className="subsection-heading">Jobs</div>
+            <div className="cards-stack">
+              {resume.jobs.map((item, i) => (
+                <ExperienceCard key={i} item={item} />
+              ))}
+            </div>
+          </>
+        )}
       </section>
     </PageShell>
   );
@@ -490,59 +411,13 @@ function ExperiencePage({ resume }) {
    PROJECTS PAGE
    ============================================================ */
 
-function ProjectsTabs({ projects, activeIndex, onSelect }) {
-  if (!projects?.length) {
-    return (
-      <div className="empty-projects">
-        <div className="empty-projects-inner">
-          <span className="empty-spark" aria-hidden="true" />
-          <p>More projects landing soon — still building.</p>
-        </div>
-      </div>
-    );
-  }
-
-  const safeIndex = Math.min(Math.max(activeIndex, 0), projects.length - 1);
-  const project = projects[safeIndex];
-
+function ProjectCard({ project }) {
   return (
-    <div className="projects-shell">
-      <div className="projects-tabs" role="tablist" aria-label="Projects">
-        {projects.map((p, i) => {
-          const isActive = i === safeIndex;
-          return (
-            <button
-              key={p.slug || p.name}
-              role="tab"
-              aria-selected={isActive}
-              aria-controls={`project-panel-${i}`}
-              id={`project-tab-${i}`}
-              className={`projects-tab ${isActive ? "active" : ""}`}
-              onClick={() => onSelect(i)}
-            >
-              <span className="projects-tab-num">P/{String(i + 1).padStart(2, "0")}</span>
-              <span className="projects-tab-name">{p.name}</span>
-              <span className="projects-tab-underline" aria-hidden="true" />
-            </button>
-          );
-        })}
-      </div>
-
-      <article
-        className="project-panel"
-        role="tabpanel"
-        id={`project-panel-${safeIndex}`}
-        aria-labelledby={`project-tab-${safeIndex}`}
-        key={project.slug || project.name}
-      >
+    <article className="projects-shell">
+      <div className="project-panel">
         <header className="project-panel-head">
-          <div>
-            <div className="project-panel-eyebrow">
-              {`Project ${String(safeIndex + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`}
-            </div>
-            <h3 className="project-panel-title">{project.name}</h3>
-          </div>
-          <span className="project-panel-dates">{project.dates}</span>
+          <h3 className="project-panel-title">{project.name}</h3>
+          {project.dates && <span className="project-panel-dates">{project.dates}</span>}
         </header>
 
         {project.tech && (
@@ -568,109 +443,205 @@ function ProjectsTabs({ projects, activeIndex, onSelect }) {
             </svg>
           </a>
         )}
-      </article>
+      </div>
+    </article>
+  );
+}
+
+function Swivel({ items, activeIndex, onSelect, label = "items", noun = "item" }) {
+  const total = items.length;
+  const wrap = (i) => ((i % total) + total) % total;
+  const prevIdx = wrap(activeIndex - 1);
+  const nextIdx = wrap(activeIndex + 1);
+  const goPrev = () => onSelect(prevIdx, -1);
+  const goNext = () => onSelect(nextIdx, 1);
+
+  const slot = (idx, kind) => {
+    const it = items[idx];
+    return (
+      <button
+        key={`${kind}-${idx}`}
+        type="button"
+        className={`swivel-item swivel-${kind}`}
+        onClick={kind === "active" ? undefined : () => onSelect(idx, kind === "next" ? 1 : -1)}
+        aria-current={kind === "active" ? "true" : undefined}
+        aria-label={kind === "active" ? `Current ${noun}: ${it.name}` : `Show ${it.name}`}
+        tabIndex={kind === "active" ? -1 : 0}
+      >
+        <span className="swivel-name">{it.name}</span>
+      </button>
+    );
+  };
+
+  return (
+    <div className="swivel" role="tablist" aria-label={label}>
+      <button
+        type="button"
+        className="swivel-arrow"
+        onClick={goPrev}
+        aria-label={`Previous ${noun}`}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+      </button>
+
+      <div className="swivel-track" key={activeIndex}>
+        {total > 1 && slot(prevIdx, "prev")}
+        {slot(activeIndex, "active")}
+        {total > 1 && slot(nextIdx, "next")}
+      </div>
+
+      <button
+        type="button"
+        className="swivel-arrow"
+        onClick={goNext}
+        aria-label={`Next ${noun}`}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </button>
     </div>
   );
 }
 
-function buildOrderedProjects(rawProjects = []) {
-  const bySlug = new Map(rawProjects.filter((p) => p.slug).map((p) => [p.slug, p]));
-  return PROJECT_SUBTABS.map(({ slug, label }) => {
-    const existing = bySlug.get(slug);
-    if (existing) return existing;
-    return {
-      slug,
-      name: label,
-      dates: "TBD",
-      tech: null,
-      bullets: ["Coming soon — write-up in progress."],
-    };
-  });
+function useSwivel(total) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  useEffect(() => {
+    if (total > 0 && activeIndex >= total) setActiveIndex(0);
+  }, [activeIndex, total]);
+
+  const select = (idx, dir = 0) => {
+    if (idx === activeIndex) return;
+    setDirection(dir);
+    setActiveIndex(idx);
+  };
+
+  const onKeyDown = (e) => {
+    if (!total) return;
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      select((activeIndex - 1 + total) % total, -1);
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      select((activeIndex + 1) % total, 1);
+    }
+  };
+
+  return { activeIndex, direction, select, onKeyDown };
 }
 
 function ProjectsPage({ resume }) {
-  const { slug } = useParams();
-  const navigate = useNavigate();
-  const ordered = buildOrderedProjects(resume.projects);
-
-  const activeIndex = (() => {
-    if (!slug) return 0;
-    const idx = ordered.findIndex((p) => p.slug === slug);
-    return idx >= 0 ? idx : 0;
-  })();
-
-  const handleSelect = (idx) => {
-    const target = ordered[idx];
-    if (target?.slug) navigate(`/projects/${target.slug}`);
-  };
+  const projects = resume.projects ?? [];
+  const { activeIndex, direction, select, onKeyDown } = useSwivel(projects.length);
 
   return (
     <PageShell>
-      <section className="section section-page">
-        <SectionHeading index="03" eyebrow="Selected work" title="Projects" />
-        <p className="section-lede">
-          A rotating set of things I've built — embedded, full-stack, and the
-          spaces between. Switch tabs to dig into each one.
-        </p>
-        <ProjectsTabs
-          projects={ordered}
-          activeIndex={activeIndex}
-          onSelect={handleSelect}
-        />
+      <section className="section section-page section-tight">
+        {projects.length === 0 ? (
+          <div className="empty-projects">
+            <div className="empty-projects-inner">
+              <span className="empty-spark" aria-hidden="true" />
+              <p>More projects landing soon — still building.</p>
+            </div>
+          </div>
+        ) : (
+          <div className="swivel-deck" onKeyDown={onKeyDown}>
+            <Swivel
+              items={projects}
+              activeIndex={activeIndex}
+              onSelect={select}
+              label="Projects"
+              noun="project"
+            />
+
+            <div
+              className={`swivel-card-wrap swivel-card-${direction >= 0 ? "in-right" : "in-left"}`}
+              key={activeIndex}
+            >
+              <ProjectCard project={projects[activeIndex]} />
+            </div>
+          </div>
+        )}
       </section>
     </PageShell>
   );
 }
 
 /* ============================================================
-   SKILLS PAGE
+   CREATIVE PAGE
    ============================================================ */
 
-function SkillsPage({ resume }) {
+const CREATIVE_ENTRIES = [
+  {
+    name: "Sociology Research",
+    bullets: [
+      "Coming soon — write-ups from sociology coursework and ongoing research interests.",
+    ],
+  },
+  {
+    name: "Music",
+    bullets: [
+      "Coming soon — what I'm listening to, playing, and producing in Logic Pro.",
+    ],
+  },
+  {
+    name: "Writing",
+    bullets: [
+      "Coming soon — short essays, project journaling, and the occasional rant.",
+    ],
+  },
+  {
+    name: "Reading",
+    bullets: [
+      "Coming soon — current reads and shelf highlights, fiction and non-fiction.",
+    ],
+  },
+];
+
+function CreativeCard({ entry }) {
+  return (
+    <article className="projects-shell">
+      <div className="project-panel">
+        <header className="project-panel-head">
+          <h3 className="project-panel-title">{entry.name}</h3>
+        </header>
+        <ul className="project-panel-bullets">
+          {entry.bullets.map((b, i) => (
+            <li key={i}>{b}</li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  );
+}
+
+function CreativePage() {
+  const entries = CREATIVE_ENTRIES;
+  const { activeIndex, direction, select, onKeyDown } = useSwivel(entries.length);
+
   return (
     <PageShell>
-      <section className="section section-page">
-        <SectionHeading index="04" eyebrow="Toolkit" title="Skills" />
-        <div className="skills-grid">
-          {Object.entries(resume.skills).map(([category, skillStr]) => (
-            <div className="skill-group" key={category}>
-              <div className="skill-group-title">{category}</div>
-              <div className="skill-tags">
-                {skillStr.split(/,\s*/).map((skill) => (
-                  <span className="skill-tag" key={skill}>{skill}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+      <section className="section section-page section-tight">
+        <div className="swivel-deck" onKeyDown={onKeyDown}>
+          <Swivel
+            items={entries}
+            activeIndex={activeIndex}
+            onSelect={select}
+            label="Creative areas"
+            noun="area"
+          />
 
-        <div className="education-block">
-          <div className="subsection-heading">Education</div>
-          {resume.education.map((edu, i) => (
-            <div className="edu-card" key={i}>
-              <div className="edu-card-main">
-                <div className="degree">{edu.degree}</div>
-                <div className="school">
-                  {edu.school}
-                  {edu.location && <span> · {edu.location}</span>}
-                </div>
-                {edu.details && <div className="edu-details">{edu.details}</div>}
-              </div>
-              <span className="edu-year">{edu.year}</span>
-            </div>
-          ))}
-        </div>
-
-        {resume.coursework?.length > 0 && (
-          <div className="coursework-block">
-            <div className="subsection-heading">Relevant Coursework</div>
-            <div className="coursework-list">
-              {resume.coursework.map((course) => (
-                <span className="coursework-item" key={course}>{course}</span>
-              ))}
-            </div>
+          <div
+            className={`swivel-card-wrap swivel-card-${direction >= 0 ? "in-right" : "in-left"}`}
+            key={activeIndex}
+          >
+            <CreativeCard entry={entries[activeIndex]} />
           </div>
-        )}
+        </div>
       </section>
     </PageShell>
   );
@@ -721,8 +692,7 @@ function AppShell({ resume }) {
           <Route path="/" element={<HomePage resume={resume} />} />
           <Route path="/experience" element={<ExperiencePage resume={resume} />} />
           <Route path="/projects" element={<ProjectsPage resume={resume} />} />
-          <Route path="/projects/:slug" element={<ProjectsPage resume={resume} />} />
-          <Route path="/skills" element={<SkillsPage resume={resume} />} />
+          <Route path="/creative" element={<CreativePage />} />
           <Route path="/contact" element={<ContactPage resume={resume} />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
