@@ -583,6 +583,7 @@ const CREATIVE_ENTRIES = [
       {
         name: "Gator Tufaan 2025-2026",
         largeImages: true,
+        largePics: true,
         about:
           "For the 2025-2026 season, season 3 of Gator Tufaan at the University of Florida, I decided to come back and lead set and mix for the team. Below is the Bollywood-American fusion mix I was able to create for the team, which led us to compete and place 4th out of 12 teams at Districts in North Carolina, winning 'Best Theme' due to the mix and set I had led. We had the opportunity to advance to Nationals in Las Vegas within the NDDL, and funds were about the only thing stopping us from going all the way. It was a fantastic season filled with growth, camaraderie, and excellence!",
         videos: [
@@ -600,9 +601,18 @@ const CREATIVE_ENTRIES = [
           trackUrl:
             "https://soundcloud.com/user-847995847/gator-tufaan-nddl-nc",
         },
+        pics: [
+          {
+            src: "/creative/tufaan-2025-2026/best-theme-celebration.png",
+            caption:
+              "Albeit blurry, our team celebrating our Best Theme award!",
+            alt: "Tufaan 2025-2026 team selfie celebrating with the Best Theme certificate",
+          },
+        ],
         slides: [
           {
-            title: "Tufaan 2025-2026 Tech Deck",
+            label: "Figure 1",
+            caption: "Tufaan 2025-2026 Tech Deck",
             embedUrl:
               "https://docs.google.com/presentation/d/e/2PACX-1vS8tCyz9TkhmI6MoUVzF_-_1pG3sP0mdxIHjcNHkOWep0-5dERrtY9XZSRpDQrqAkN26halEDihQ4Iq/pubembed?start=false&loop=false&delayms=3000",
           },
@@ -610,19 +620,19 @@ const CREATIVE_ENTRIES = [
         images: [
           {
             src: "/creative/tufaan-2025-2026/uv-light-up-bushes.png",
-            label: "Figure 1",
+            label: "Figure 2",
             caption: "UV set with light-up bushes",
             alt: "Tufaan 2025-2026 stage with glowing UV bushes",
           },
           {
             src: "/creative/tufaan-2025-2026/uv-painted-walls.png",
-            label: "Figure 2",
+            label: "Figure 3",
             caption: "UV set with painted walls",
             alt: "Tufaan 2025-2026 stage with painted UV-reactive walls",
           },
           {
             src: "/creative/tufaan-2025-2026/electronics-test-run.png",
-            label: "Figure 3",
+            label: "Figure 4",
             caption:
               "First electronics test run - remote-control UV lights + bush light rig",
             alt: "Outdoor test of UV-painted backdrops and light-up bushes powered by a remote-controlled rig",
@@ -806,19 +816,28 @@ function ImageBlock({ image }) {
 }
 
 function SlidesBlock({ slides }) {
+  const captionText = slides.caption || slides.title;
   return (
-    <div className="video-block">
-      {slides.title && <div className="video-block-title">{slides.title}</div>}
+    <figure className="slides-block">
       <div className="video-frame video-frame-slides">
         <iframe
           src={slides.embedUrl}
-          title={slides.title || "Slides"}
+          title={captionText || "Slides"}
           loading="lazy"
           allow="autoplay; fullscreen"
           allowFullScreen
         />
       </div>
-    </div>
+      {(slides.label || captionText) && (
+        <figcaption className="image-caption">
+          {slides.label && (
+            <span className="image-caption-label">{slides.label}:</span>
+          )}
+          {slides.label && captionText && " "}
+          {captionText}
+        </figcaption>
+      )}
+    </figure>
   );
 }
 
