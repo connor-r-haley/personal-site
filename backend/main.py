@@ -25,7 +25,7 @@ def get_resume():
         "experience": [
             {
                 "role": "Embedded Systems & Software Lead",
-                "company": "Drone Home Design Team — University of Florida",
+                "company": "Drone Home Design Team - University of Florida",
                 "location": "Gainesville, FL",
                 "dates": "Aug 2024 – May 2025",
                 "bullets": [
@@ -37,7 +37,7 @@ def get_resume():
             },
             {
                 "role": "Engineering Team Lead",
-                "company": "Theme Park Engineering & Design (TPED) — University of Florida",
+                "company": "Theme Park Engineering & Design (TPED) - University of Florida",
                 "location": "Gainesville, FL",
                 "dates": "Aug 2020 – May 2023",
                 "bullets": [
@@ -50,7 +50,7 @@ def get_resume():
         "additional_experience": [
             {
                 "role": "Audio Engineering & Technical Lead",
-                "company": "Cultural Competitive Dance Teams — University of Florida",
+                "company": "Cultural Competitive Dance Teams - University of Florida",
                 "location": "Gainesville, FL",
                 "dates": "Aug 2021 – Present",
                 "bullets": [
@@ -67,14 +67,14 @@ def get_resume():
                 "bullets": [
                     "Coordinated volunteers for the Regional and State Florida Science Olympiad competitions held at UF.",
                     "Handled marketing, selection, placement, and communication with volunteer workers across both events.",
-                    "Supervised day-of 'Build Events' — engineering challenges like long-soaring model planes and Rube Goldberg machines.",
+                    "Supervised day-of 'Build Events' - engineering challenges like long-soaring model planes and Rube Goldberg machines.",
                 ],
             },
         ],
         "jobs": [
             {
                 "role": "Library Assistant",
-                "company": "Marston Science Library — University of Florida",
+                "company": "Marston Science Library - University of Florida",
                 "location": "Gainesville, FL",
                 "dates": "Jun 2022 – Feb 2023",
                 "bullets": [
@@ -136,7 +136,7 @@ def get_resume():
                 "tech": "ROS2, NVIDIA Jetson, Flask, LTE, Embedded C/C++",
                 "dates": "Aug 2024 – May 2025",
                 "bullets": [
-                    "Coming soon — full write-up of the Drone Home autonomous drone-retrieval and recharging vehicle.",
+                    "Coming soon - full write-up of the Drone Home autonomous drone-retrieval and recharging vehicle.",
                 ],
             },
             {
@@ -145,7 +145,7 @@ def get_resume():
                 "tech": "TM4C123, FreeRTOS, DSP, Audio Processing",
                 "dates": "2025",
                 "bullets": [
-                    "Coming soon — overview of StaRTOS, a real-time RTOS-driven light show app on a TM4C123.",
+                    "Coming soon - overview of StaRTOS, a real-time RTOS-driven light show app on a TM4C123.",
                 ],
             },
             {
@@ -154,7 +154,7 @@ def get_resume():
                 "tech": "OBD-II, CAN bus, Microcontroller, Addressable LEDs",
                 "dates": "TBD",
                 "bullets": [
-                    "Coming soon — RPM-reactive in-car lighting driven by live OBD-II telemetry over CAN.",
+                    "Coming soon - RPM-reactive in-car lighting driven by live OBD-II telemetry over CAN.",
                 ],
             },
             {
@@ -166,6 +166,15 @@ def get_resume():
                     "Configured UART, I2C, and SPI interfaces on a TM4C123 μC to communicate with sensors & LCD displays.",
                     "Developed multi-threaded RTOS apps with priority scheduling, IPC, dynamic threading, & blocking semaphores.",
                     "Configured Tiva DSP, Beaglebone connection, audio output, and personal real-time light show app, StaRTOS.",
+                ],
+            },
+            {
+                "slug": "moralocracy",
+                "name": "Moralocracy",
+                "tech": None,
+                "dates": "TBD",
+                "bullets": [
+                    "Coming soon - write-up of Moralocracy in progress.",
                 ],
             },
         ],
