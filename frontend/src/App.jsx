@@ -577,6 +577,12 @@ function ProjectsPage({ resume }) {
 
 const CREATIVE_ENTRIES = [
   {
+    name: "Theatrical Engineer",
+    bullets: [
+      "Coming soon — stagecraft, show systems, and the engineering side of live performance.",
+    ],
+  },
+  {
     name: "Sociology Research",
     bullets: [
       "Coming soon — write-ups from sociology coursework and ongoing research interests.",
