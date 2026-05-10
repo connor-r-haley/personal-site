@@ -476,16 +476,18 @@ function Swivel({ items, activeIndex, onSelect, label = "items", noun = "item", 
 
   return (
     <div className={`swivel${compact ? " swivel-compact" : ""}`} role="tablist" aria-label={label}>
-      <button
-        type="button"
-        className="swivel-arrow"
-        onClick={goPrev}
-        aria-label={`Previous ${noun}`}
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="m15 18-6-6 6-6" />
-        </svg>
-      </button>
+      {total > 1 && (
+        <button
+          type="button"
+          className="swivel-arrow"
+          onClick={goPrev}
+          aria-label={`Previous ${noun}`}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+      )}
 
       <div className="swivel-track" key={activeIndex}>
         {!compact && total > 1 && slot(prevIdx, "prev")}
@@ -493,16 +495,18 @@ function Swivel({ items, activeIndex, onSelect, label = "items", noun = "item", 
         {!compact && total > 1 && slot(nextIdx, "next")}
       </div>
 
-      <button
-        type="button"
-        className="swivel-arrow"
-        onClick={goNext}
-        aria-label={`Next ${noun}`}
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="m9 18 6-6-6-6" />
-        </svg>
-      </button>
+      {total > 1 && (
+        <button
+          type="button"
+          className="swivel-arrow"
+          onClick={goNext}
+          aria-label={`Next ${noun}`}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }
@@ -750,14 +754,36 @@ const CREATIVE_ENTRIES = [
   },
   {
     name: "Unity Game Dev",
-    bullets: [
-      "Coming soon - Unity projects, prototypes, and game-dev experiments.",
+    subProjects: [
+      {
+        name: "The Other Mother",
+        downloads: [
+          {
+            host: "itch.io",
+            label: "Play / Download",
+            url: "https://sonnyeclipsed.itch.io/theothermother",
+          },
+        ],
+        bullets: [],
+      },
     ],
   },
   {
     name: "Sociology Research",
-    bullets: [
-      "Coming soon - write-ups from sociology coursework and ongoing research interests.",
+    subProjects: [
+      {
+        name: "Bridging the Human Development Index Gap",
+        aboutLabel: "Description",
+        aboutItalic: true,
+        hideAboutHeading: true,
+        about:
+          "Compares four post-crisis health systems - Rwanda's Community-Based Health Insurance, Bangladesh's BRAC NGO, Ethiopia's Health Extension Program, and Lebanon's pluralistic public-private model - to extract transferable strategies for closing Sub-Saharan Africa's HDI gap, and proposes a comparative framework for matching each model to local terrain, post-conflict status, and income.",
+        paper: {
+          src: "/creative/sociology-research/hdi-gap-2025.pdf",
+          class: "Social Inequality",
+          year: "2025",
+        },
+      },
     ],
   },
   {
@@ -860,10 +886,47 @@ function CreativeSubWheel({ items }) {
         className={`sub-card-body sub-card-${direction >= 0 ? "in-right" : "in-left"}`}
         key={activeIndex}
       >
+        {sub.paper && (
+          <section className="sub-segment">
+            <div className="paper-frame">
+              <iframe
+                src={`${sub.paper.src}#view=FitH`}
+                title={sub.name || "Paper"}
+                loading="lazy"
+              />
+            </div>
+            <p className="paper-actions">
+              <a href={sub.paper.src} download className="paper-link">
+                Download PDF ↓
+              </a>
+            </p>
+          </section>
+        )}
+
         {sub.about && (
           <section className="sub-segment">
-            <h3 className="segment-title">About</h3>
-            <p className="segment-body">{sub.about}</p>
+            {!sub.hideAboutHeading && (
+              <h3 className="segment-title">{sub.aboutLabel || "About"}</h3>
+            )}
+            {(sub.paper?.class || sub.paper?.year) && (
+              <div className="paper-meta">
+                {sub.paper.class && (
+                  <p className="paper-meta-line">
+                    <strong>Class:</strong> {sub.paper.class}
+                  </p>
+                )}
+                {sub.paper.year && (
+                  <p className="paper-meta-line">
+                    <strong>Year:</strong> {sub.paper.year}
+                  </p>
+                )}
+              </div>
+            )}
+            <p
+              className={`segment-body${sub.aboutItalic ? " segment-body-italic" : ""}`}
+            >
+              {sub.about}
+            </p>
           </section>
         )}
 
@@ -960,6 +1023,30 @@ function CreativeSubWheel({ items }) {
               </div>
             )}
             {sub.setNote && <p className="set-note">{sub.setNote}</p>}
+          </section>
+        )}
+
+        {sub.downloads?.length > 0 && (
+          <section className="sub-segment">
+            <h3 className="segment-title">Downloads</h3>
+            <ul className="downloads-list">
+              {sub.downloads.map((d, i) => (
+                <li key={i}>
+                  <a
+                    href={d.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="download-link"
+                  >
+                    {d.host && (
+                      <span className="download-host">{d.host}</span>
+                    )}
+                    <span className="download-label">{d.label || d.url}</span>
+                    <span className="download-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 
