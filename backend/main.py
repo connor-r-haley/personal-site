@@ -178,6 +178,29 @@ def get_resume():
                 ],
             },
             {
+                "slug": "sub-saharan-hdi-research",
+                "name": "Sub-Saharan HDI Research",
+                "dates": "2025",
+                "about": (
+                    "Compares four post-crisis health systems - Rwanda's "
+                    "Community-Based Health Insurance, Bangladesh's BRAC NGO, "
+                    "Ethiopia's Health Extension Program, and Lebanon's pluralistic "
+                    "public-private model - to extract transferable strategies for "
+                    "closing Sub-Saharan Africa's HDI gap, and proposes a comparative "
+                    "framework for matching each model to local terrain, post-conflict "
+                    "status, and income."
+                ),
+                "paper": {
+                    "src": "/projects/hdi-gap-2025.pdf",
+                    "label": "Paper",
+                    "caption": (
+                        "Bridging the Human Development Index Gap - "
+                        "Social Inequality coursework, 2025."
+                    ),
+                },
+                "bullets": [],
+            },
+            {
                 "slug": "startup-proposal",
                 "name": "Startup Proposal",
                 "dates": "Aug 2021",

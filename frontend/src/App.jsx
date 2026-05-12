@@ -817,40 +817,42 @@ const CREATIVE_ENTRIES = [
     ],
   },
   {
-    name: "Sociology Research",
-    subProjects: [
+    name: "Reading",
+    tiers: [
       {
-        name: "Bridging the Human Development Index Gap",
-        aboutLabel: "Description",
-        aboutItalic: true,
-        hideAboutHeading: true,
-        about:
-          "Compares four post-crisis health systems - Rwanda's Community-Based Health Insurance, Bangladesh's BRAC NGO, Ethiopia's Health Extension Program, and Lebanon's pluralistic public-private model - to extract transferable strategies for closing Sub-Saharan Africa's HDI gap, and proposes a comparative framework for matching each model to local terrain, post-conflict status, and income.",
-        paper: {
-          src: "/creative/sociology-research/hdi-gap-2025.pdf",
-          class: "Social Inequality",
-          year: "2025",
-        },
+        name: "Best Readings",
+        books: [
+          { title: "The Idiot", author: "Fyodor Dostoevsky", year: "1869" },
+          { title: "The Dark Forest", author: "Cixin Liu", year: "2008" },
+          { title: "The Inferno", author: "Dante Alighieri", year: "1320" },
+        ],
+      },
+      {
+        name: "Great Works",
+        books: [
+          { title: "The Three Body Problem", author: "Cixin Liu", year: "2008" },
+          { title: "Outliers", author: "Malcolm Gladwell", year: "2008" },
+          { title: "The Stranger", author: "Albert Camus", year: "1942" },
+          { title: "No Longer Human", author: "Osamu Dazai", year: "1948" },
+          { title: "1984", author: "George Orwell", year: "1949" },
+          { title: "Foundation", author: "Isaac Asimov", year: "1951" },
+          { title: "No Longer Human", author: "Junji Ito", year: "2017" },
+          { title: "Death's End", author: "Cixin Liu", year: "2010" },
+          { title: "Crime & Punishment", author: "Fyodor Dostoevsky", year: "1866" },
+        ],
       },
     ],
   },
   {
     name: "Music",
-    bullets: [
-      "Coming soon - what I'm listening to, playing, and producing in Logic Pro.",
-    ],
-  },
-  {
-    name: "Writing",
-    bullets: [
-      "Coming soon - short essays, project journaling, and the occasional rant.",
-    ],
-  },
-  {
-    name: "Reading",
-    bullets: [
-      "Coming soon - current reads and shelf highlights, fiction and non-fiction.",
-    ],
+    music: {
+      artist: "DR SWAMP",
+      profileUrl: "https://on.soundcloud.com/rLuoW5NBtxCYqKhDW0",
+      embedSrc:
+        "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-847995847&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+      about:
+        "I've produced Desi-Fusion mixes for competitive dance teams, as well as personal mix projects - all on Logic Pro.",
+    },
   },
 ];
 
@@ -1143,12 +1145,71 @@ function CreativeSubWheel({ items }) {
   );
 }
 
+function BookTierList({ tiers }) {
+  return (
+    <div className="book-tiers">
+      {tiers.map((tier, i) => (
+        <section className="book-tier" key={i}>
+          <h3 className="book-tier-name">{tier.name}</h3>
+          <ul className="book-tier-list">
+            {tier.books.map((book, j) => (
+              <li className="book-tier-row" key={j}>
+                <span className="book-tier-title">
+                  <em>{book.title}</em>
+                  {book.author && (
+                    <span className="book-tier-author"> - {book.author}</span>
+                  )}
+                </span>
+                {book.year && (
+                  <span className="book-tier-year">({book.year})</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function MusicProfile({ music }) {
+  return (
+    <div className="music-profile">
+      <div className="mix-frame mix-frame-tall">
+        <iframe
+          src={music.embedSrc}
+          title={`${music.artist} on SoundCloud`}
+          loading="lazy"
+          allow="autoplay; encrypted-media"
+          scrolling="no"
+        />
+      </div>
+      {music.artist && (
+        <p className="mix-credit music-credit">
+          <a
+            href={music.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {music.artist}
+          </a>
+        </p>
+      )}
+      {music.about && <p className="music-about">{music.about}</p>}
+    </div>
+  );
+}
+
 function CreativeCard({ entry }) {
   return (
     <article className="projects-shell">
       <div className="project-panel">
         {entry.subProjects?.length ? (
           <CreativeSubWheel items={entry.subProjects} />
+        ) : entry.tiers?.length ? (
+          <BookTierList tiers={entry.tiers} />
+        ) : entry.music ? (
+          <MusicProfile music={entry.music} />
         ) : (
           <ul className="project-panel-bullets">
             {entry.bullets.map((b, i) => (
