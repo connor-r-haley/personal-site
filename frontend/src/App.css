@@ -872,6 +872,13 @@
   border: 0;
 }
 
+.paper-frame-sm {
+  width: 65%;
+  height: 468px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .paper-citation {
   margin: 0;
   display: flex;
@@ -945,6 +952,11 @@
 @media (max-width: 720px) {
   .paper-frame {
     height: 540px;
+  }
+
+  .paper-frame-sm {
+    width: 100%;
+    height: 351px;
   }
 }
 

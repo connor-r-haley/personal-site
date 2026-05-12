@@ -429,11 +429,45 @@ function ProjectCard({ project }) {
           </div>
         )}
 
-        <ul className="project-panel-bullets">
-          {project.bullets.map((b, i) => (
-            <li key={i}>{b}</li>
-          ))}
-        </ul>
+        {project.bullets?.length > 0 && (
+          <ul className="project-panel-bullets">
+            {project.bullets.map((b, i) => (
+              <li key={i}>{b}</li>
+            ))}
+          </ul>
+        )}
+
+        {project.paper && (
+          <section className="sub-segment">
+            <div className="paper-frame paper-frame-sm">
+              <iframe
+                src={`${project.paper.src}#view=FitH`}
+                title={project.paper.caption || project.name || "Paper"}
+                loading="lazy"
+              />
+            </div>
+            {(project.paper.label || project.paper.caption) && (
+              <figcaption className="image-caption">
+                {project.paper.label && (
+                  <span className="image-caption-label">
+                    {project.paper.label}:
+                  </span>
+                )}
+                {project.paper.label && project.paper.caption && " "}
+                {project.paper.caption}
+              </figcaption>
+            )}
+            <p className="paper-actions">
+              <a href={project.paper.src} download className="paper-link">
+                Download PDF ↓
+              </a>
+            </p>
+          </section>
+        )}
+
+        {project.about && (
+          <p className="segment-body">{project.about}</p>
+        )}
 
         {project.url && (
           <a className="project-panel-link" href={project.url} target="_blank" rel="noopener noreferrer">
@@ -757,6 +791,14 @@ const CREATIVE_ENTRIES = [
     subProjects: [
       {
         name: "The Other Mother",
+        about:
+          "A hide-and-seek horror game inspired by the stop-motion film Coraline. You play as Coraline, trapped in the Other World, sneaking through a distorted version of her home and hiding behind furniture to evade the sinister Other Mother's gaze. Built in Unity with scripted NavMesh AI, waypoint patrols, and a crouch-to-hide stealth mechanic that flips between 'Hidden' and 'Seen!' states.",
+        videos: [
+          {
+            title: "Gameplay",
+            youtubeId: "u6vanK8Bihw",
+          },
+        ],
         downloads: [
           {
             host: "itch.io",
@@ -764,6 +806,12 @@ const CREATIVE_ENTRIES = [
             url: "https://sonnyeclipsed.itch.io/theothermother",
           },
         ],
+        development: {
+          src: "/creative/unity-game-dev/the-other-mother-design.pdf",
+          label: "Design Doc",
+          caption:
+            "The Other Mother - design document covering mechanics, levels, UI, audio, and the development roadmap.",
+        },
         bullets: [],
       },
     ],
@@ -1056,6 +1104,39 @@ function CreativeSubWheel({ items }) {
               <li key={i}>{b}</li>
             ))}
           </ul>
+        )}
+
+        {sub.development && (
+          <section className="sub-segment">
+            <h3 className="segment-title">Development</h3>
+            <div className="paper-frame">
+              <iframe
+                src={`${sub.development.src}#view=FitH`}
+                title={sub.development.caption || "Development document"}
+                loading="lazy"
+              />
+            </div>
+            {(sub.development.label || sub.development.caption) && (
+              <figcaption className="image-caption">
+                {sub.development.label && (
+                  <span className="image-caption-label">
+                    {sub.development.label}:
+                  </span>
+                )}
+                {sub.development.label && sub.development.caption && " "}
+                {sub.development.caption}
+              </figcaption>
+            )}
+            <p className="paper-actions">
+              <a
+                href={sub.development.src}
+                download
+                className="paper-link"
+              >
+                Download PDF ↓
+              </a>
+            </p>
+          </section>
         )}
       </div>
     </div>

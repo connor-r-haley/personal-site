@@ -177,6 +177,36 @@ def get_resume():
                     "Coming soon - write-up of Moralocracy in progress.",
                 ],
             },
+            {
+                "slug": "startup-proposal",
+                "name": "Startup Proposal",
+                "dates": "Aug 2021",
+                "about": (
+                    "OurCampus is a UF-built mobile app proposal that consolidates "
+                    "student organization discovery, live event and room maps, GPS "
+                    "classroom routing, and night-time student safety into a single "
+                    "platform tied to each student's UFL email. Survey data from UF "
+                    "students - 86% unaware of nightly campus events and 90% in favor "
+                    "of stronger night-time safety measures - directly shaped each "
+                    "feature, including a 'Protect My Walk' mode that pings UFPD if a "
+                    "student doesn't arrive at their destination. The technical plan "
+                    "specifies a cross-platform React Native client, Google Maps-backed "
+                    "GPS, an admin web panel, and a REST API on top of MySQL, delivered "
+                    "through a six-month SDLC with QA and third-party penetration "
+                    "testing. Pitched as a CISE legacy project, OurCampus doubles as a "
+                    "real software-engineering experience for UF computer science "
+                    "students and a template for other campuses."
+                ),
+                "paper": {
+                    "src": "/projects/startup-proposal.pdf",
+                    "label": "Proposal",
+                    "caption": (
+                        "OurCampus - startup proposal co-authored with Robert Dick "
+                        "and Andrew Sandell for ENC3246, Aug 2021."
+                    ),
+                },
+                "bullets": [],
+            },
         ],
         "skills": {
             "Programming Languages": "C, C++, Python, Java, Assembly (ARM), Verilog, VHDL, MATLAB, SQL (PostgreSQL)",
