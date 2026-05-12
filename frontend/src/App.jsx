@@ -851,7 +851,7 @@ const CREATIVE_ENTRIES = [
       embedSrc:
         "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-847995847&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
       about:
-        "I've produced Desi-Fusion mixes for competitive dance teams, as well as personal mix projects - all on Logic Pro.",
+        "I've produced Desi-Fusion mixes for competitive dance teams, as well as personal mix projects, all with Logic Pro X.",
     },
   },
 ];
