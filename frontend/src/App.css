@@ -1633,6 +1633,203 @@
   margin: 0;
 }
 
+.business-about {
+  text-align: left;
+  max-width: 70ch;
+}
+
+.business-subhead {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 1.25rem 0 0.6rem;
+}
+
+.business-mix {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.business-contact {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.business-contact-blurb {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.business-product-link {
+  color: var(--text-heading);
+  border-bottom: 1px dashed var(--border-strong);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.business-product-link:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold);
+}
+
+.business-track-embeds {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.business-track-embed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.business-track-embed .mix-frame iframe {
+  height: 180px;
+}
+
+.business-track-embed .mix-credit {
+  text-align: left;
+  white-space: normal;
+  font-size: 0.72rem;
+}
+
+.business-track-note {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ---- Manila folder tabs ---- */
+
+.folder {
+  --manila: #d8b878;
+  --manila-bright: #ecd5a0;
+  --manila-shadow: rgba(0, 0, 0, 0.45);
+  --folder-ink: #2a1d05;
+}
+
+.folder-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 0 12px;
+  margin-bottom: -1px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+.folder-tab {
+  position: relative;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.6rem 0.95rem;
+  min-width: 150px;
+  color: rgba(42, 29, 5, 0.78);
+  background: linear-gradient(180deg, #b89856 0%, #9a7d44 100%);
+  clip-path: polygon(
+    0 100%,
+    0 14px,
+    14px 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% 100%
+  );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18),
+              0 -2px 6px rgba(0, 0, 0, 0.35);
+  transform: translateY(4px);
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.folder-tab::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+}
+
+.folder-tab:hover:not(.is-active) {
+  background: linear-gradient(180deg, #c9a661 0%, #ab8a4d 100%);
+  color: rgba(42, 29, 5, 0.92);
+  transform: translateY(2px);
+}
+
+.folder-tab:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+.folder-tab.is-active {
+  background: linear-gradient(180deg, var(--manila-bright) 0%, var(--manila) 100%);
+  color: var(--folder-ink);
+  font-weight: 600;
+  transform: translateY(0);
+  z-index: 3;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+              0 -3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.folder-tab-label {
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.folder-body {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.folder-body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(180deg, var(--manila) 0%, rgba(216, 184, 120, 0.0) 100%);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  pointer-events: none;
+}
+
+@media (max-width: 560px) {
+  .folder-tabs {
+    padding: 0 4px;
+  }
+  .folder-tab {
+    min-width: 0;
+    flex: 1;
+    padding: 0.75rem 0.9rem 0.85rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+  }
+}
+
 /* ============================================================
    FOOTER
    ============================================================ */

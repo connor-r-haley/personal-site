@@ -47,6 +47,19 @@ def get_resume():
                 ],
             },
         ],
+        "internships": [
+            {
+                "role": "Embedded Systems Intern",
+                "company": "RevIt Lighting",
+                "location": "Gainesville, FL",
+                "dates": "March 2026 – Present",
+                "bullets": [
+                    "Building LED car lighting that reacts to live vehicle data pulled from the OBD-II port (RPM, speed, and other diagnostics).",
+                    "Developing ESP32-based firmware using ESP-NOW and Bluetooth to sync car telemetry between the OBD-II reader, LED controllers, and a companion mobile app.",
+                    "Collaborating with embedded engineers from IC2, a Gainesville-based embedded device engineering firm, to harden hardware, comms, and product design.",
+                ],
+            },
+        ],
         "additional_experience": [
             {
                 "role": "Audio Engineering & Technical Lead",

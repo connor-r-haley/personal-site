@@ -382,6 +382,17 @@ function ExperiencePage({ resume }) {
           ))}
         </div>
 
+        {resume.internships?.length > 0 && (
+          <>
+            <div className="subsection-heading">Internships</div>
+            <div className="cards-stack">
+              {resume.internships.map((item, i) => (
+                <ExperienceCard key={i} item={item} />
+              ))}
+            </div>
+          </>
+        )}
+
         {resume.additional_experience?.length > 0 && (
           <>
             <div className="subsection-heading">Beyond Engineering</div>
@@ -1254,15 +1265,314 @@ function CreativePage() {
    BUSINESS PAGE
    ============================================================ */
 
+const BUSINESS_SERVICES = [
+  {
+    name: "Music Track Mixing",
+    price: "Negotiable",
+    about:
+      "Logic Pro X mixes built for the stage — tight transitions, dynamic drops, crowd-ready energy.",
+    highlights: [
+      "Has mixed for 3 Indian weddings!",
+      "Mixed for hundreds of hip-hop and Bollywood dancers",
+      "Custom edits, transitions, drops, blends",
+      "Mix won 'Best Theme' at Queen City Dhamaka 2026 in NC!",
+    ],
+    trackTypes: [
+      {
+        label: "Club Mixes",
+        embeds: [
+          {
+            src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2320987259&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+            artist: "DR SWAMP",
+            artistUrl: "https://soundcloud.com/user-847995847",
+            trackTitle: "SWEET BUT PSYCHO V DARK HORSE CLUB MIX [3 YEARS LATER] [HEADPHONES]",
+            trackUrl: "https://soundcloud.com/user-847995847/sweet-but-psycho-v-dark-1",
+          },
+          {
+            src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1624732128&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+            artist: "DR SWAMP",
+            artistUrl: "https://soundcloud.com/user-847995847",
+            trackTitle: "THE COLOR VIOLET / MOVES LIKE JAGGER || TORY LANEZ X MAROON 5",
+            trackUrl: "https://soundcloud.com/user-847995847/violet-in-the-club-the-color-violet-x-moves-like-jagger-tory-lanez-x-maroon-5",
+          },
+        ],
+      },
+      {
+        label: "Competitive Dance Mixes",
+        embeds: [
+          {
+            src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2271589319&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+            artist: "DR SWAMP",
+            artistUrl: "https://soundcloud.com/user-847995847",
+            trackTitle: "Bolly Hiphop",
+            trackUrl: "https://soundcloud.com/user-847995847/ae-mere-humsafar-bolly",
+          },
+          {
+            src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2271590096&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+            artist: "DR SWAMP",
+            artistUrl: "https://soundcloud.com/user-847995847",
+            trackTitle: "Bhangra",
+            trackUrl: "https://soundcloud.com/user-847995847/evil-jordan-carti-bhangra",
+          },
+          {
+            src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2271589622&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+            artist: "DR SWAMP",
+            artistUrl: "https://soundcloud.com/user-847995847",
+            trackTitle: "Southie",
+            trackUrl: "https://soundcloud.com/user-847995847/salambala-madharassi-southie",
+          },
+        ],
+      },
+      {
+        label: "Wedding Mixes",
+        note: "Can't upload wedding mixes due to song copyright :(",
+      },
+      {
+        label: "Desi-Fusion Mixes!",
+        embeds: [
+          {
+            src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1706272566&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+            artist: "DR SWAMP",
+            artistUrl: "https://soundcloud.com/user-847995847",
+            trackTitle:
+              "SO THIS IS LOVE / HINDI || CONTEMPORARY || LAG JA GALE SE PHIR - LATA MANGESHKAR X SNEHA",
+            trackUrl: "https://soundcloud.com/user-847995847/so-this-is-love-1",
+          },
+          {
+            src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2271578075&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+            artist: "DR SWAMP",
+            artistUrl: "https://soundcloud.com/user-847995847",
+            trackTitle: "CINEMATIC O RE PIYA [x Young And Beautiful - Lana Del Rey]",
+            trackUrl: "https://soundcloud.com/user-847995847/o-re-piya-x-young-and",
+          },
+        ],
+      },
+      { label: "Inquiry and I can help!" },
+    ],
+    contact: {
+      label: "connorhaleycontact@gmail.com",
+      href: "mailto:connorhaleycontact@gmail.com?subject=Mix%20Request",
+      blurb: "Email me for mix requests and inquiries!",
+    },
+  },
+  {
+    name: "Party SFX",
+    price: "Negotiable",
+    about:
+      "Plug-and-play party lighting and effects rentals - blacklight rigs, fog, and atmosphere for events, sets, and shoots. Email for availability and rates.",
+    contact: {
+      label: "connorhaleycontact@gmail.com",
+      href: "mailto:connorhaleycontact@gmail.com?subject=Party%20SFX%20Inquiry",
+      blurb: "Email me to book or ask about availability!",
+    },
+    products: [
+      { name: "500W Blacklights", quantity: 2 },
+      { name: "Fog Machine", quantity: 1 },
+    ],
+  },
+];
+
+function BusinessServiceCard({ service }) {
+  return (
+    <article className="projects-shell">
+      <div className="project-panel">
+        <header className="project-panel-head">
+          <h3 className="project-panel-title">{service.name}</h3>
+          {service.price && (
+            <span className="project-panel-dates">{service.price}</span>
+          )}
+        </header>
+
+        {service.about && (
+          <p className="segment-body business-about">{service.about}</p>
+        )}
+
+        {service.highlights?.length > 0 && (
+          <>
+            <div className="business-subhead">Highlights</div>
+            <ul className="project-panel-bullets">
+              {service.highlights.map((h) => (
+                <li key={h}>{h}</li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {service.trackTypes?.length > 0 && (
+          <>
+            <div className="business-subhead">Track Types</div>
+            <ul className="project-panel-bullets">
+              {service.trackTypes.map((t) => {
+                const item = typeof t === "string" ? { label: t } : t;
+                return (
+                  <li key={item.label}>
+                    {item.label}
+                    {item.note && (
+                      <div className="business-track-note">{item.note}</div>
+                    )}
+                    {item.embeds?.length > 0 && (
+                      <div className="business-track-embeds">
+                        {item.embeds.map((e) => (
+                          <div className="business-track-embed" key={e.src}>
+                            <div className="mix-frame">
+                              <iframe
+                                src={e.src}
+                                title={e.trackTitle || `${e.artist} on SoundCloud`}
+                                loading="lazy"
+                                allow="autoplay; encrypted-media"
+                                scrolling="no"
+                              />
+                            </div>
+                            {(e.artist || e.trackTitle) && (
+                              <p className="mix-credit">
+                                {e.artistUrl ? (
+                                  <a
+                                    href={e.artistUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {e.artist}
+                                  </a>
+                                ) : (
+                                  e.artist
+                                )}
+                                {e.artist && e.trackTitle && " · "}
+                                {e.trackUrl ? (
+                                  <a
+                                    href={e.trackUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {e.trackTitle}
+                                  </a>
+                                ) : (
+                                  e.trackTitle
+                                )}
+                              </p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        )}
+
+        {service.products?.length > 0 && (
+          <>
+            <div className="business-subhead">Products</div>
+            <ul className="project-panel-bullets">
+              {service.products.map((p) => (
+                <li key={p.name}>
+                  {p.href ? (
+                    <a
+                      className="business-product-link"
+                      href={p.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {p.name}
+                    </a>
+                  ) : (
+                    p.name
+                  )}
+                  {p.quantity ? ` x${p.quantity}` : ""}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {service.mix && (
+          <div className="business-mix">
+            <div className="mix-frame mix-frame-tall">
+              <iframe
+                src={service.mix.embedSrc}
+                title={`${service.mix.artist} on SoundCloud`}
+                loading="lazy"
+                allow="autoplay; encrypted-media"
+                scrolling="no"
+              />
+            </div>
+            {service.mix.profileUrl && (
+              <p className="mix-credit music-credit">
+                <a
+                  href={service.mix.profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {service.mix.artist} on SoundCloud →
+                </a>
+              </p>
+            )}
+          </div>
+        )}
+
+        {service.contact && (
+          <div className="business-contact">
+            {service.contact.blurb && (
+              <p className="business-contact-blurb">{service.contact.blurb}</p>
+            )}
+            <a
+              className="project-panel-link"
+              href={service.contact.href}
+            >
+              {service.contact.label}
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M7 17 17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </a>
+          </div>
+        )}
+      </div>
+    </article>
+  );
+}
+
 function BusinessPage() {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const active = BUSINESS_SERVICES[activeIdx];
+
   return (
     <PageShell>
       <section className="section section-page">
         <SectionHeading index="05" eyebrow="Ventures" title="Business" />
-        <p className="business-placeholder">
-          Coming soon - business ventures, side projects, and entrepreneurial
-          experiments.
-        </p>
+
+        <div className="folder">
+          <div className="folder-tabs" role="tablist" aria-label="Business services">
+            {BUSINESS_SERVICES.map((service, i) => {
+              const isActive = i === activeIdx;
+              return (
+                <button
+                  key={service.name}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`folder-panel-${i}`}
+                  id={`folder-tab-${i}`}
+                  tabIndex={isActive ? 0 : -1}
+                  className={`folder-tab ${isActive ? "is-active" : ""}`}
+                  onClick={() => setActiveIdx(i)}
+                >
+                  <span className="folder-tab-label">{service.name}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div
+            className="folder-body"
+            role="tabpanel"
+            id={`folder-panel-${activeIdx}`}
+            aria-labelledby={`folder-tab-${activeIdx}`}
+          >
+            <BusinessServiceCard service={active} />
+          </div>
+        </div>
       </section>
     </PageShell>
   );
