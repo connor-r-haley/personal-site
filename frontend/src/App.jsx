@@ -38,7 +38,7 @@ function Loader() {
   const messages = [
     "Loading",
     "Fetching",
-    "Just a little longer, this is a free site hosting service ;)",
+    "*jeopardy theme song* ...",
   ];
 
   return (
