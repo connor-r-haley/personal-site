@@ -65,7 +65,7 @@ def get_resume():
                 "role": "Audio Engineering & Technical Lead",
                 "company": "Cultural Competitive Dance Teams - University of Florida",
                 "location": "Gainesville, FL",
-                "dates": "Aug 2021 – Present",
+                "dates": "Aug 2021 – March 2026",
                 "bullets": [
                     "Co-founded & led two competitive dance teams to compete nationally, while engineering mix, set, prop, & effects.",
                     "Integrated creative workflows with technical design, applying signal-processing and systems-integration principles.",
@@ -124,10 +124,12 @@ def get_resume():
                 ],
             },
             {
-                "role": "Credit Union Teller",
+                "role": "Credit Union Teller Internship",
                 "company": "VyStar Credit Union",
                 "dates": "Jun 2018 – May 2019",
                 "bullets": [
+                    "Prestigious high school internship where I managed a VyStar Credit Union within my high school.",
+                    "One of 8 students to manage the credit union. Would operate the local VyStar Credit Union branch on Saturdays.",
                     "Interfaced with and utilized front-end financial software as a Credit Union Teller.",
                     "Handled deposits, withdrawals, and transfers for credit-union members.",
                 ],

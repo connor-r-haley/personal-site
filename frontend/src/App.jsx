@@ -29,16 +29,19 @@ function Loader() {
   useEffect(() => {
     const toFetching = setTimeout(() => setStage(1), 5000);
     const toLongWait = setTimeout(() => setStage(2), 10000);
+    const toJeopardy = setTimeout(() => setStage(3), 25000);
     return () => {
       clearTimeout(toFetching);
       clearTimeout(toLongWait);
+      clearTimeout(toJeopardy);
     };
   }, []);
 
   const messages = [
     "Loading",
     "Fetching",
-    "*jeopardy theme song* ...",
+    "Just a little longer, this is a free site hosting service ;)",
+    "*jeopardy theme song*",
   ];
 
   return (
@@ -46,7 +49,7 @@ function Loader() {
       <img className="loader-logo" src="/logo_gold.png" alt="Connor Haley" />
       <div
         key={stage}
-        className={`loader-text${stage === 2 ? " loader-text-long" : ""}`}
+        className={`loader-text${stage >= 2 ? " loader-text-long" : ""}`}
       >
         {messages[stage]}
       </div>

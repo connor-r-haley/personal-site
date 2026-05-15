@@ -101,9 +101,7 @@
 }
 
 .loader-text-long::after {
-  content: none;
-  animation: none;
-  width: 0;
+  margin-left: 0.35em;
 }
 
 @keyframes dots {
