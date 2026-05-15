@@ -1210,6 +1210,7 @@
   text-align: center;
 }
 
+
 .video-frame {
   position: relative;
   width: 100%;
@@ -1636,6 +1637,12 @@
 .business-about {
   text-align: left;
   max-width: 70ch;
+}
+
+.project-about {
+  text-align: left;
+  max-width: 70ch;
+  margin-bottom: 1.25rem;
 }
 
 .business-subhead {

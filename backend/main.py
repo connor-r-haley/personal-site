@@ -144,21 +144,49 @@ def get_resume():
         ],
         "projects": [
             {
+                "slug": "startos",
+                "name": "StaRTOS",
+                "tech": "TM4C123, RTOS, Threads, Semaphores, FIFOs, I²C, SPI, UART",
+                "dates": "2025",
+                "about": (
+                    "StaRTOS is my personal real-time LED light animator running on a TM4C123 "
+                    "microcontroller. I went well above and beyond the initial RTOS final-project "
+                    "scope, evolving it into a full frame animator with persistent memory and "
+                    "swappable slides - all coordinated with threads, semaphores, and FIFOs, and "
+                    "talking to peripherals over I²C, SPI, and UART to drive the LEDs."
+                ),
+                "bullets": [
+                    "Multi-threaded frame animator with priority scheduling and blocking semaphores",
+                    "Persistent memory so animations and slide state survive resets",
+                    "Swappable slide-style scenes coordinated through inter-thread FIFOs",
+                    "Peripheral I/O over I²C, SPI, and UART to drive LEDs and supporting hardware",
+                ],
+                "video": {
+                    "youtubeId": "bIWaN66xJg4",
+                    "title": "StaRTOS Demo",
+                    "description": (
+                        "A full walkthrough of every feature of StaRTOS - the multi-threaded "
+                        "LED animator, persistent slide memory, and peripheral integration over "
+                        "I²C, SPI, and UART."
+                    ),
+                },
+                "paper": {
+                    "src": "/projects/RTOSFinalProject.pdf",
+                    "label": "Initial Vision",
+                    "caption": (
+                        "My initial vision was to simply change the colors of the LEDs, but I "
+                        "realized they were not colored LEDs, so I went big and expanded the project "
+                        "to be a full frame animator built with lightning-fast RTOS infrastructure!"
+                    ),
+                },
+            },
+            {
                 "slug": "drone-home",
                 "name": "Drone Home",
                 "tech": "ROS2, NVIDIA Jetson, Flask, LTE, Embedded C/C++",
                 "dates": "Aug 2024 – May 2025",
                 "bullets": [
                     "Coming soon - full write-up of the Drone Home autonomous drone-retrieval and recharging vehicle.",
-                ],
-            },
-            {
-                "slug": "startos",
-                "name": "StaRTOS",
-                "tech": "TM4C123, FreeRTOS, DSP, Audio Processing",
-                "dates": "2025",
-                "bullets": [
-                    "Coming soon - overview of StaRTOS, a real-time RTOS-driven light show app on a TM4C123.",
                 ],
             },
             {
@@ -207,8 +235,7 @@ def get_resume():
                     "src": "/projects/hdi-gap-2025.pdf",
                     "label": "Paper",
                     "caption": (
-                        "Bridging the Human Development Index Gap - "
-                        "Social Inequality coursework, 2025."
+                        "Bridging the Human Development Index Gap, 2025."
                     ),
                 },
                 "bullets": [],

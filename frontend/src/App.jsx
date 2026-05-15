@@ -440,12 +440,22 @@ function ProjectCard({ project }) {
           </div>
         )}
 
+        {project.about && (
+          <p className="segment-body project-about">{project.about}</p>
+        )}
+
         {project.bullets?.length > 0 && (
           <ul className="project-panel-bullets">
             {project.bullets.map((b, i) => (
               <li key={i}>{b}</li>
             ))}
           </ul>
+        )}
+
+        {project.video && (
+          <section className="sub-segment">
+            <VideoBlock video={project.video} />
+          </section>
         )}
 
         {project.paper && (
@@ -474,10 +484,6 @@ function ProjectCard({ project }) {
               </a>
             </p>
           </section>
-        )}
-
-        {project.about && (
-          <p className="segment-body">{project.about}</p>
         )}
 
         {project.url && (
@@ -868,9 +874,12 @@ const CREATIVE_ENTRIES = [
 ];
 
 function VideoBlock({ video }) {
+  const hasDescription = Boolean(video.description);
   return (
     <div className="video-block">
-      <div className="video-block-title">{video.title}</div>
+      {!hasDescription && (
+        <div className="video-block-title">{video.title}</div>
+      )}
       <div className="video-frame">
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}?rel=0`}
@@ -881,6 +890,15 @@ function VideoBlock({ video }) {
           allowFullScreen
         />
       </div>
+      {hasDescription && (
+        <figcaption className="image-caption">
+          {video.title && (
+            <span className="image-caption-label">{video.title}:</span>
+          )}
+          {video.title && " "}
+          {video.description}
+        </figcaption>
+      )}
     </div>
   );
 }
@@ -1282,11 +1300,11 @@ const BUSINESS_SERVICES = [
         label: "Club Mixes",
         embeds: [
           {
-            src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2320987259&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+            src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2321079365&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
             artist: "DR SWAMP",
             artistUrl: "https://soundcloud.com/user-847995847",
-            trackTitle: "SWEET BUT PSYCHO V DARK HORSE CLUB MIX [3 YEARS LATER] [HEADPHONES]",
-            trackUrl: "https://soundcloud.com/user-847995847/sweet-but-psycho-v-dark-1",
+            trackTitle: "SWEET BUT PSYCHO V DARK HORSE CLUB MIX [2026]",
+            trackUrl: "https://soundcloud.com/user-847995847/sweet-but-psycho-v-dark-horse",
           },
           {
             src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1624732128&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
@@ -1359,7 +1377,7 @@ const BUSINESS_SERVICES = [
     name: "Party SFX",
     price: "Negotiable",
     about:
-      "Plug-and-play party lighting and effects rentals - blacklight rigs, fog, and atmosphere for events, sets, and shoots. Email for availability and rates.",
+      "Local blacklights and fog machine for affordable price! Transform your local party/event! Great for house parties, night parties, etc.! Email for availability and rates.",
     contact: {
       label: "connorhaleycontact@gmail.com",
       href: "mailto:connorhaleycontact@gmail.com?subject=Party%20SFX%20Inquiry",
