@@ -2135,11 +2135,12 @@
   }
 
   .swivel-deck > .swivel .swivel-item {
-    flex: 0 0 5.5rem;
-    width: 5.5rem;
-    padding: 0.6rem 0.45rem;
+    flex: 0 0 5rem;
+    width: 5rem;
+    padding: 0.7rem 0.5rem;
     border: none;
-    border-radius: 999px;
+    border-radius: 22px;
+    white-space: normal;
     box-shadow:
       0 0 12px rgba(212, 175, 55, 0.14),
       0 0 28px rgba(212, 175, 55, 0.08),
@@ -2155,11 +2156,19 @@
   }
 
   .swivel-deck > .swivel .swivel-name {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
+    line-height: 1.2;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
+    -webkit-hyphens: none;
   }
 
   .swivel-deck > .swivel .swivel-active .swivel-name {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
 
   .swivel-deck {
