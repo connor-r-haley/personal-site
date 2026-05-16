@@ -2156,19 +2156,19 @@
   }
 
   .swivel-deck > .swivel .swivel-name {
-    font-size: 0.82rem;
+    font-size: 0.66rem;
     line-height: 1.2;
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    overflow-wrap: normal;
+    word-break: normal;
     hyphens: auto;
     -webkit-hyphens: auto;
   }
 
   .swivel-deck > .swivel .swivel-active .swivel-name {
-    font-size: 0.92rem;
+    font-size: 0.74rem;
   }
 
   .swivel-deck {
