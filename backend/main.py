@@ -181,6 +181,16 @@ def get_resume():
                         "to be a full frame animator built with lightning-fast RTOS infrastructure!"
                     ),
                 },
+                "videos": [
+                    {
+                        "youtubeId": "dIuQNkbJiFs",
+                        "title": "Full Project Presentation",
+                        "description": (
+                            "Complete StaRTOS project presentation - design decisions, RTOS "
+                            "architecture, and a full feature walkthrough."
+                        ),
+                    },
+                ],
             },
             {
                 "slug": "drone-home",
@@ -190,6 +200,7 @@ def get_resume():
                 "bullets": [
                     "Coming soon - full write-up of the Drone Home autonomous drone-retrieval and recharging vehicle.",
                 ],
+                "url": "https://github.com/Drone-Home/drone-home-combined",
             },
             {
                 "slug": "obdii-light-product",
@@ -210,6 +221,41 @@ def get_resume():
                     "Developed multi-threaded RTOS apps with priority scheduling, IPC, dynamic threading, & blocking semaphores.",
                     "Configured Tiva DSP, Beaglebone connection, audio output, and personal real-time light show app, StaRTOS.",
                 ],
+                "labs": [
+                    {"name": "Lab 0"},
+                    {"name": "Lab 1"},
+                    {
+                        "name": "Lab 2",
+                        "video": {
+                            "youtubeId": "R341q_s4YbA",
+                            "title": "Lab 2 demo",
+                        },
+                    },
+                    {"name": "Lab 3"},
+                    {"name": "Lab 4"},
+                    {"name": "Lab 5"},
+                    {"name": "Lab 6"},
+                    {"name": "Lab 7"},
+                ],
+            },
+            {
+                "slug": "pcb-design",
+                "name": "PCB Design",
+                "tech": "KiCad, Schematic Capture, PCB Layout",
+                "dates": "2025",
+                "about": (
+                    "Designed a custom printed circuit board from scratch in KiCad - "
+                    "schematic capture, footprint assignment, layout, and routing - to "
+                    "fabricate a working PCB."
+                ),
+                "video": {
+                    "youtubeId": "zC66C97DCqc",
+                    "title": "PCB Design Walkthrough",
+                    "description": (
+                        "Walkthrough of using KiCad to design and create a custom PCB board, "
+                        "from schematic to finished layout."
+                    ),
+                },
             },
             {
                 "slug": "moralocracy",

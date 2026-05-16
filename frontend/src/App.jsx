@@ -455,6 +455,24 @@ function ProjectCard({ project }) {
           </ul>
         )}
 
+        {project.labs?.length > 0 && (
+          <div className="project-labs">
+            {project.labs.map((lab) => (
+              <div className="project-lab" key={lab.name}>
+                <div className="project-lab-name">{lab.name}</div>
+                {lab.description && (
+                  <p className="project-lab-description">{lab.description}</p>
+                )}
+                {lab.video && (
+                  <div className="project-lab-video">
+                    <VideoBlock video={lab.video} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
         {project.video && (
           <section className="sub-segment">
             <VideoBlock video={project.video} />
@@ -487,6 +505,16 @@ function ProjectCard({ project }) {
               </a>
             </p>
           </section>
+        )}
+
+        {project.videos?.length > 0 && (
+          <div className="project-videos">
+            {project.videos.map((v) => (
+              <section className="sub-segment" key={v.youtubeId}>
+                <VideoBlock video={v} />
+              </section>
+            ))}
+          </div>
         )}
 
         {project.url && (
