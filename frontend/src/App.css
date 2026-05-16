@@ -1952,16 +1952,40 @@
     visibility: visible;
   }
 
+  .nav-links {
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
   .nav-link {
-    padding: 0.85rem 1rem;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    justify-content: flex-start;
+    padding: 0.55rem 0.5rem;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    justify-content: center;
+    font-family: Zapfino, "Snell Roundhand", "Apple Chancery", "Edwardian Script ITC", cursive;
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    color: #ffffff;
+    letter-spacing: 0;
+    text-transform: none;
+    transition: color 0.18s ease;
+  }
+
+  .nav-link:hover {
+    background: transparent;
+    color: var(--gold-bright);
   }
 
   .nav-link.active {
-    border-color: var(--gold);
+    background: transparent;
+    border: none;
+    color: var(--gold);
+  }
+
+  .nav-link .nav-link-num {
+    display: none;
   }
 
   .nav-toggle {
@@ -2002,5 +2026,67 @@
 
   .project-panel {
     padding: 0.25rem 0 0.5rem;
+  }
+}
+
+/* ---- Phone: center content on every page except Business ---- */
+
+@media (max-width: 768px) {
+  .page:not(.business-page) {
+    text-align: center;
+  }
+
+  .page:not(.business-page) .project-about,
+  .page:not(.business-page) .business-about,
+  .page:not(.business-page) .section-lede {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .page:not(.business-page) .project-panel-bullets,
+  .page:not(.business-page) .card-bullets,
+  .page:not(.business-page) ul {
+    list-style-position: inside;
+    padding-left: 0;
+  }
+
+  .page:not(.business-page) .project-panel-bullets li,
+  .page:not(.business-page) .card-bullets li {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .page:not(.business-page) .project-panel-bullets li::before,
+  .page:not(.business-page) .card-bullets li::before {
+    position: static;
+    display: inline;
+    margin-right: 0.4rem;
+  }
+
+  .page:not(.business-page) .project-panel-head,
+  .page:not(.business-page) .card-header,
+  .page:not(.business-page) .project-panel-tech {
+    justify-content: center;
+  }
+
+  .page:not(.business-page) .hero-name,
+  .page:not(.business-page) .hero-cta {
+    justify-content: center;
+  }
+
+  .page:not(.business-page) .hero-name {
+    margin-left: 0;
+  }
+
+  .page:not(.business-page) .project-lab,
+  .page:not(.business-page) .project-lab-name,
+  .page:not(.business-page) .project-lab-description {
+    text-align: center;
+  }
+
+  .page:not(.business-page) .image-caption,
+  .page:not(.business-page) .video-block-title {
+    text-align: center;
   }
 }

@@ -167,8 +167,8 @@ function SectionHeading({ index, eyebrow, title }) {
   );
 }
 
-function PageShell({ children }) {
-  return <div className="page">{children}</div>;
+function PageShell({ children, className = "" }) {
+  return <div className={`page ${className}`.trim()}>{children}</div>;
 }
 
 function ExperienceCard({ item }) {
@@ -1587,7 +1587,7 @@ function BusinessPage() {
   const active = BUSINESS_SERVICES[activeIdx];
 
   return (
-    <PageShell>
+    <PageShell className="business-page">
       <section className="section section-page">
         <SectionHeading index="05" eyebrow="Ventures" title="Business" />
 
