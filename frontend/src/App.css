@@ -1954,21 +1954,21 @@
 
   .nav-links {
     justify-content: center;
-    gap: 1.25rem;
+    gap: 2.75rem;
   }
 
   .nav-link {
-    padding: 0.55rem 0.5rem;
+    padding: 0.45rem 0.5rem;
     border-radius: 0;
     border: none;
     background: transparent;
     justify-content: center;
     font-family: Zapfino, "Snell Roundhand", "Apple Chancery", "Edwardian Script ITC", cursive;
     font-weight: 700;
-    font-size: 1.6rem;
+    font-size: 1.15rem;
     line-height: 1.2;
     color: #ffffff;
-    letter-spacing: 0;
+    letter-spacing: 0.18em;
     text-transform: none;
     transition: color 0.18s ease;
   }
@@ -2046,22 +2046,18 @@
 
   .page:not(.business-page) .project-panel-bullets,
   .page:not(.business-page) .card-bullets,
-  .page:not(.business-page) ul {
-    list-style-position: inside;
-    padding-left: 0;
+  .page:not(.business-page) .downloads-list,
+  .page:not(.business-page) .book-tier-list {
+    display: inline-block;
+    text-align: left;
+    max-width: 100%;
   }
 
   .page:not(.business-page) .project-panel-bullets li,
-  .page:not(.business-page) .card-bullets li {
-    padding-left: 0;
-    text-align: center;
-  }
-
-  .page:not(.business-page) .project-panel-bullets li::before,
-  .page:not(.business-page) .card-bullets li::before {
-    position: static;
-    display: inline;
-    margin-right: 0.4rem;
+  .page:not(.business-page) .card-bullets li,
+  .page:not(.business-page) .downloads-list li,
+  .page:not(.business-page) .book-tier-list li {
+    text-align: left;
   }
 
   .page:not(.business-page) .project-panel-head,

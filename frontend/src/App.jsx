@@ -157,11 +157,9 @@ function TopNav({ name }) {
    SHARED PIECES
    ============================================================ */
 
-function SectionHeading({ index, eyebrow, title }) {
+function SectionHeading({ title }) {
   return (
     <div className="section-heading">
-      <span className="section-index">{index}</span>
-      <span className="section-eyebrow">{eyebrow}</span>
       <h2 className="section-title">{title}</h2>
     </div>
   );
