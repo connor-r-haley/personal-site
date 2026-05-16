@@ -320,6 +320,7 @@ function ContactForm() {
 function ContactSection({ resume }) {
   return (
     <section id="contact" className="section section-page section-tight">
+      <SectionHeading index="06" eyebrow="Say hello" title="Get in Touch" />
       <div className="contact-shell">
         <div className="contact-info">
           <p className="contact-info-lead">
