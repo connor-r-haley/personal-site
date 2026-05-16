@@ -2161,10 +2161,10 @@
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
-    word-break: keep-all;
-    overflow-wrap: normal;
-    hyphens: none;
-    -webkit-hyphens: none;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 
   .swivel-deck > .swivel .swivel-active .swivel-name {
