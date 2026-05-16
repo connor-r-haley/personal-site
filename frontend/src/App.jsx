@@ -319,7 +319,7 @@ function ContactForm() {
 
 function ContactSection({ resume }) {
   return (
-    <section id="contact" className="section section-page">
+    <section id="contact" className="section section-page section-tight">
       <SectionHeading index="06" eyebrow="Say hello" title="Get in Touch" />
       <div className="contact-shell">
         <div className="contact-info">
@@ -362,7 +362,7 @@ function HomePage({ resume }) {
 
 function ContactPage({ resume }) {
   return (
-    <PageShell>
+    <PageShell className="contact-page">
       <ContactSection resume={resume} />
     </PageShell>
   );
@@ -375,8 +375,8 @@ function ContactPage({ resume }) {
 function ExperiencePage({ resume }) {
   return (
     <PageShell>
-      <section className="section section-page">
-        <SectionHeading index="02" eyebrow="Career" title="Experience" />
+      <section className="section section-page section-tight">
+        <div className="subsection-heading subsection-heading-first">Experience</div>
         <div className="cards-stack">
           {resume.experience.map((item, i) => (
             <ExperienceCard key={i} item={item} />
@@ -477,6 +477,16 @@ function ProjectCard({ project }) {
           </section>
         )}
 
+        {project.videos?.length > 0 && (
+          <div className="project-videos">
+            {project.videos.map((v) => (
+              <section className="sub-segment" key={v.youtubeId}>
+                <VideoBlock video={v} />
+              </section>
+            ))}
+          </div>
+        )}
+
         {project.paper && (
           <section className="sub-segment">
             <div className="paper-frame paper-frame-sm">
@@ -503,16 +513,6 @@ function ProjectCard({ project }) {
               </a>
             </p>
           </section>
-        )}
-
-        {project.videos?.length > 0 && (
-          <div className="project-videos">
-            {project.videos.map((v) => (
-              <section className="sub-segment" key={v.youtubeId}>
-                <VideoBlock video={v} />
-              </section>
-            ))}
-          </div>
         )}
 
         {project.url && (
@@ -1586,9 +1586,7 @@ function BusinessPage() {
 
   return (
     <PageShell className="business-page">
-      <section className="section section-page">
-        <SectionHeading index="05" eyebrow="Ventures" title="Business" />
-
+      <section className="section section-page section-tight">
         <div className="folder">
           <div className="folder-tabs" role="tablist" aria-label="Business services">
             {BUSINESS_SERVICES.map((service, i) => {
