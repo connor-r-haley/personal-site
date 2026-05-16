@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -594,6 +594,7 @@ function Swivel({ items, activeIndex, onSelect, label = "items", noun = "item", 
 function useSwivel(total) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const touchRef = useRef({ x: 0, y: 0, t: 0, active: false });
 
   useEffect(() => {
     if (total > 0 && activeIndex >= total) setActiveIndex(0);
@@ -605,23 +606,50 @@ function useSwivel(total) {
     setActiveIndex(idx);
   };
 
+  const goPrev = () => total && select((activeIndex - 1 + total) % total, -1);
+  const goNext = () => total && select((activeIndex + 1) % total, 1);
+
   const onKeyDown = (e) => {
     if (!total) return;
     if (e.key === "ArrowLeft") {
       e.preventDefault();
-      select((activeIndex - 1 + total) % total, -1);
+      goPrev();
     } else if (e.key === "ArrowRight") {
       e.preventDefault();
-      select((activeIndex + 1) % total, 1);
+      goNext();
     }
   };
 
-  return { activeIndex, direction, select, onKeyDown };
+  const swipeHandlers = {
+    onTouchStart: (e) => {
+      const t = e.touches[0];
+      touchRef.current = { x: t.clientX, y: t.clientY, t: Date.now(), active: true };
+    },
+    onTouchEnd: (e) => {
+      const start = touchRef.current;
+      if (!start.active) return;
+      touchRef.current = { ...start, active: false };
+      const end = e.changedTouches[0];
+      const dx = end.clientX - start.x;
+      const dy = end.clientY - start.y;
+      const dt = Date.now() - start.t;
+      // Horizontal swipe: must travel >= 50px, be mostly horizontal, and complete in < 800ms.
+      if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 800) {
+        if (dx < 0) goNext();
+        else goPrev();
+      }
+    },
+    onTouchCancel: () => {
+      touchRef.current = { ...touchRef.current, active: false };
+    },
+  };
+
+  return { activeIndex, direction, select, onKeyDown, swipeHandlers };
 }
 
 function ProjectsPage({ resume }) {
   const projects = resume.projects ?? [];
-  const { activeIndex, direction, select, onKeyDown } = useSwivel(projects.length);
+  const { activeIndex, direction, select, onKeyDown, swipeHandlers } = useSwivel(projects.length);
 
   return (
     <PageShell>
@@ -634,7 +662,7 @@ function ProjectsPage({ resume }) {
             </div>
           </div>
         ) : (
-          <div className="swivel-deck" onKeyDown={onKeyDown}>
+          <div className="swivel-deck" onKeyDown={onKeyDown} {...swipeHandlers}>
             <Swivel
               items={projects}
               activeIndex={activeIndex}
@@ -976,11 +1004,11 @@ function SlidesBlock({ slides }) {
 }
 
 function CreativeSubWheel({ items }) {
-  const { activeIndex, direction, select, onKeyDown } = useSwivel(items.length);
+  const { activeIndex, direction, select, onKeyDown, swipeHandlers } = useSwivel(items.length);
   const sub = items[activeIndex];
 
   return (
-    <div className="sub-card" onKeyDown={onKeyDown}>
+    <div className="sub-card" onKeyDown={onKeyDown} {...swipeHandlers}>
       <Swivel
         items={items}
         activeIndex={activeIndex}
@@ -1282,12 +1310,12 @@ function CreativeCard({ entry }) {
 
 function CreativePage() {
   const entries = CREATIVE_ENTRIES;
-  const { activeIndex, direction, select, onKeyDown } = useSwivel(entries.length);
+  const { activeIndex, direction, select, onKeyDown, swipeHandlers } = useSwivel(entries.length);
 
   return (
     <PageShell>
       <section className="section section-page section-tight">
-        <div className="swivel-deck" onKeyDown={onKeyDown}>
+        <div className="swivel-deck" onKeyDown={onKeyDown} {...swipeHandlers}>
           <Swivel
             items={entries}
             activeIndex={activeIndex}
